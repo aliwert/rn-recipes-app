@@ -1,0 +1,15 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "javascript.validate.enable": false,
+  "typescript.tsserver.log": "verbose",
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/build": true
+  },
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.arrowParens": "avoid",
+  "eslint.alwaysShowStatus": true
+}

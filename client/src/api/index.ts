@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Base API configuration
 const API = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

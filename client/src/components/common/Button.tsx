@@ -5,6 +5,7 @@ interface ButtonProps {
   title: string;
   onPress: () => void;
   variant?: "primary" | "secondary";
+  disabled?: boolean;
 }
 
 const Button = ({ title, onPress, variant = "primary" }: ButtonProps) => {

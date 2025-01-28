@@ -1,11 +1,16 @@
-import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import User from "../models/User";
+'use strict';
+
+import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import User from '../models/User';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
-  throw new Error("JWT_SECRET environment variable is not defined.");
+  throw new Error('JWT_SECRET environment variable is not defined.');
 }
 
 // Register User
@@ -16,7 +21,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     // Check if user exists
     const userExists = await User.findOne({ $or: [{ email }, { username }] });
     if (userExists) {
-      res.status(400).json({ message: "User already exists" });
+      res.status(400).json({ message: 'User already exists' });
       return;
     }
 
@@ -29,13 +34,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     // Generate token
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
-      expiresIn: "7d",
+      expiresIn: '7d',
     });
 
     res.status(201).json({ token, user: { id: user._id, username, email } });
   } catch (error) {
-    console.error("Error in register:", error);
-    res.status(500).json({ message: "Error creating user" });
+    console.error('Error in register:', error);
+    res.status(500).json({ message: 'Error creating user' });
   }
 };
 
@@ -47,25 +52,25 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     // Find user
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ message: "Invalid credentials" });
+      res.status(400).json({ message: 'Invalid credentials' });
       return;
     }
 
     // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      res.status(400).json({ message: "Invalid credentials" });
+      res.status(400).json({ message: 'Invalid credentials' });
       return;
     }
 
     // Generate token
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
-      expiresIn: "7d",
+      expiresIn: '7d',
     });
 
     res.json({ token, user: { id: user._id, username: user.username, email } });
   } catch (error) {
-    console.error("Error in login:", error);
-    res.status(500).json({ message: "Error logging in" });
+    console.error('Error in login:', error);
+    res.status(500).json({ message: 'Error logging in' });
   }
 };

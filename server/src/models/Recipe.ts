@@ -1,4 +1,6 @@
-import mongoose, { Document } from "mongoose";
+'use strict';
+
+import mongoose, { Document } from 'mongoose';
 
 export interface IRecipe extends Document {
   title: string;
@@ -18,4 +20,4 @@ const RecipeSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model<IRecipe>("Recipe", RecipeSchema);
+export default mongoose.model<IRecipe>('Recipe', RecipeSchema);

@@ -64,20 +64,10 @@ client/
 
 ## Environment Setup
 
-1. Create `.env` file:
+- Create `.env` file:
 
 ```bash
 API_URL=<your_backend_api_url>
-```
-
-2. Install dependencies:
-
-```bash
-npm install @react-navigation/native
-npm install @react-native-async-storage/async-storage
-npm install @reduxjs/toolkit react-redux
-npm install axios
-npm install react-native-safe-area-context
 ```
 
 ## Development
